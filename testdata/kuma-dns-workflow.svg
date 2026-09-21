@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1075" width="1440" height="1075" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+    <marker id="arrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .t    { font-size: 23px; font-weight: 700; fill: #0f172a; }
+      .sub  { font-size: 13px; fill: #64748b; }
+      .bt   { font-size: 14px; font-weight: 700; fill: #0f172a; }
+      .bt2  { font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .b    { font-size: 12px; fill: #334155; }
+      .m    { font-size: 12px; fill: #1e293b; font-family: 'SF Mono', Menlo, Consolas, monospace; }
+      .ms   { font-size: 11px; fill: #475569; font-family: 'SF Mono', Menlo, Consolas, monospace; }
+      .lbl  { font-size: 11px; fill: #475569; }
+      .num  { font-size: 14px; font-weight: 700; fill: #1d4ed8; }
+      .ok   { font-size: 12px; fill: #047857; font-family: 'SF Mono', Menlo, Consolas, monospace; }
+      .pt   { font-size: 10px; fill: #0f172a; font-family: 'SF Mono', Menlo, Consolas, monospace; }
+      .ln   { stroke: #334155; stroke-width: 2; fill: none; }
+      .lnm  { stroke: #94a3b8; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+      .pbox { fill: #ffffff; stroke: #64748b; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1075" fill="#ffffff"/>
+
+  <text class="t"   x="40" y="42">Kuma 2.14.5 — how a DNS lookup is resolved (default Helm values)</text>
+  <text class="sub" x="40" y="68">chart kuma/kuma 2.14.5, no overrides · verified on a kind cluster, 2026-09-21</text>
+
+  <!-- Box A -->
+  <rect x="40" y="95" width="380" height="140" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text class="bt"  x="58" y="122">Helm values — defaults</text>
+  <text class="m"   x="58" y="150">injector.builtinDNS.enabled: true</text>
+  <text class="m"   x="58" y="172">injector.builtinDNS.port: 15053</text>
+  <text class="m"   x="58" y="194">injector.builtinDNS.experimentalProxy: true</text>
+  <text class="lbl" x="58" y="218">experimentalProxy selects the in-process DNS proxy</text>
+
+  <!-- Box B -->
+  <rect x="480" y="95" width="560" height="140" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <text class="bt"  x="498" y="122">kuma-control-plane</text>
+  <text class="b"   x="498" y="148">mutating webhook injects kuma-init and the kuma-sidecar container</text>
+  <text class="ms"  x="498" y="170">sidecar args: run --log-level=info</text>
+  <line x1="498" y1="182" x2="1022" y2="182" stroke="#6ee7b7" stroke-width="1"/>
+  <text class="b"   x="498" y="204">DNSGenerator: the DP advertises feature-embedded-dns, so the CP ships</text>
+  <text class="b"   x="498" y="224">the record list as a JSON route /dns rather than a DNS listener</text>
+
+  <path class="ln" d="M 420 165 L 472 165" marker-end="url(#arrow)"/>
+  <text class="lbl" x="446" y="156" text-anchor="middle">CP env</text>
+
+  <path class="ln" d="M 760 235 L 760 314" marker-end="url(#arrow)"/>
+  <text class="lbl" x="772" y="258">xDS</text>
+
+  <!-- kube-dns -->
+  <rect x="1075" y="420" width="330" height="175" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text class="bt" x="1100" y="446">kube-dns / CoreDNS</text>
+  <text class="ms" x="1100" y="472">10.x.0.10:53</text>
+  <text class="b"  x="1100" y="500">the nameserver taken from</text>
+  <text class="b"  x="1100" y="522">the pod's /etc/resolv.conf</text>
+  <text class="b"  x="1100" y="550">resolves example.com and</text>
+  <text class="b"  x="1100" y="572">every other public name</text>
+
+  <!-- Pod -->
+  <rect x="40" y="280" width="1000" height="612" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+  <text class="bt" x="58" y="308">Pod — namespace labelled kuma.io/sidecar-injection: enabled</text>
+
+  <!-- app container -->
+  <rect x="62" y="400" width="220" height="180" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text class="bt2" x="78" y="426">app container</text>
+  <text class="ms"  x="78" y="450">nslookup</text>
+  <text class="ms"  x="78" y="468">nginx_demo_svc_80.mesh</text>
+  <text class="lbl" x="78" y="488">resolved from the local map</text>
+  <text class="ms"  x="78" y="514">nslookup example.com</text>
+  <text class="lbl" x="78" y="534">forwarded upstream</text>
+  <text class="b"   x="78" y="562">resolv.conf → 10.x.0.10:53</text>
+
+  <!-- kuma-init -->
+  <rect x="62" y="630" width="220" height="150" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text class="bt2" x="78" y="656">1 · kuma-init</text>
+  <text class="ms"  x="78" y="680">--redirect-all-dns-traffic</text>
+  <text class="b"   x="78" y="708">installs the iptables rules</text>
+  <text class="b"   x="78" y="730">that rewrite every udp/tcp</text>
+  <text class="b"   x="78" y="752">:53 packet to port 15053</text>
+
+  <!-- flow 2 -->
+  <path class="ln" d="M 282 475 L 348 475" marker-end="url(#arrow)"/>
+  <text class="num" x="315" y="501" text-anchor="middle">2</text>
+
+  <!-- sidecar container -->
+  <rect x="320" y="320" width="700" height="542" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text class="bt2" x="338" y="346">kuma-sidecar container</text>
+
+  <!-- kuma-dp process -->
+  <rect x="338" y="360" width="664" height="356" rx="6" fill="#e0ecfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text class="bt2" x="356" y="384">kuma-dp process (Go)</text>
+  <text class="ms"  x="356" y="404">args: run --log-level=info</text>
+
+  <!-- embedded dns proxy -->
+  <rect x="356" y="414" width="628" height="195" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text class="bt2" x="372" y="438">3 · embedded DNS proxy — github.com/miekg/dns</text>
+  <text class="ms"  x="372" y="458">goroutine inside kuma-dp, listens udp + tcp</text>
+  <line x1="396" y1="492" x2="968" y2="492" stroke="#93c5fd" stroke-width="1"/>
+  <text class="b"   x="396" y="512">5 · look the name up in the in-memory dnsMap</text>
+  <text class="ok"  x="396" y="536">6 hit  → authoritative answer A 240.0.0.0, never leaves the pod</text>
+  <text class="m"   x="396" y="560">7 miss → forward to the resolv.conf nameserver</text>
+  <text class="lbl" x="396" y="586">every query is logged at V(1) — raise the log level to see it</text>
+
+  <!-- config fetcher -->
+  <rect x="356" y="628" width="628" height="66" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text class="bt2" x="372" y="652">4 · config-fetcher (kuma-dp goroutine)</text>
+  <text class="ms"  x="372" y="676">HTTP GET /dns every 1s → ReloadMap() swaps the dnsMap atomically</text>
+
+  <path class="ln" d="M 500 628 L 500 613" marker-end="url(#arrow)"/>
+
+  <!-- envoy -->
+  <rect x="338" y="746" width="664" height="95" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text class="bt2" x="356" y="772">Envoy process (same container)</text>
+  <text class="b"   x="356" y="796">dynamic-config route /dns — the record list as a static JSON blob, ttl 30</text>
+  <text class="lbl" x="356" y="820">a config endpoint; name resolution happens entirely inside kuma-dp</text>
+
+  <path class="ln"  d="M 600 694 L 600 738" marker-end="url(#arrow)"/>
+  <text class="lbl" x="612" y="712">GET /dns</text>
+  <path class="lnm" d="M 790 738 L 790 698" marker-end="url(#arrowMuted)"/>
+  <text class="lbl" x="802" y="712">JSON</text>
+
+  <!-- flow 7 -->
+  <path class="ln" d="M 984 500 L 1067 500" marker-end="url(#arrow)"/>
+  <text class="num" x="1026" y="490" text-anchor="middle">7</text>
+  <path class="lnm" d="M 1067 532 L 986 532" marker-end="url(#arrowMuted)"/>
+  <text class="lbl" x="1026" y="550" text-anchor="middle">answer</text>
+
+  <!-- port badges on the box edges -->
+  <rect class="pbox" x="264" y="466" width="36" height="18" rx="3"/>
+  <text class="pt"   x="282" y="479" text-anchor="middle">:53</text>
+
+  <rect class="pbox" x="327" y="466" width="58" height="18" rx="3"/>
+  <text class="pt"   x="356" y="479" text-anchor="middle">:15053</text>
+
+  <rect class="pbox" x="1057" y="467" width="36" height="18" rx="3"/>
+  <text class="pt"   x="1075" y="480" text-anchor="middle">:53</text>
+
+  <rect class="pbox" x="640" y="737" width="80" height="18" rx="3"/>
+  <text class="pt"   x="680" y="750" text-anchor="middle">unix socket</text>
+
+  <!-- callout -->
+  <rect x="40" y="917" width="1360" height="125" rx="8" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="1.5"/>
+  <text class="bt" x="60" y="944">Seeing the queries</text>
+  <text class="b"  x="60" y="970">Every lookup is logged at V(1). Raise the sidecar's log level with a ContainerPatch in the CP namespace, referenced by kuma.io/container-patches:</text>
+  <text class="m"  x="60" y="996">sidecarPatch: [{op: replace, path: /args/1, value: '"--log-level=debug"'}]</text>
+  <text class="m"  x="60" y="1022">DEBUG dnsproxy got request {"type": 1, "name": "example.com.", "entry": null}</text>
+</svg>

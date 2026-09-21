@@ -1,0 +1,87 @@
+version: 2
+
+project_name: svg2drawio
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - main: ./cmd/svg2drawio
+    binary: svg2drawio
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    # The build signature printed by `svg2drawio version`.
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+      - -X main.commit={{.Commit}}
+      - -X main.date={{.Date}}
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+archives:
+  - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    formats: ["tar.gz"]
+    files:
+      - LICENSE
+      - README.md
+      - SKILL.md
+      - src: .third_party_licenses/**/*
+        dst: third_party_licenses
+        strip_parent: true
+
+checksum:
+  name_template: checksums.txt
+
+snapshot:
+  version_template: "{{ .Tag }}-next"
+
+# An SPDX SBOM per release archive, attached to the GitHub release. syft is
+# installed by the release workflow (anchore/sbom-action).
+sboms:
+  - artifacts: archive
+
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^ci:'
+      - Merge pull request
+      - Merge branch
+
+homebrew_casks:
+  - name: svg2drawio
+    binaries: ["svg2drawio"]
+    repository:
+      owner: bcollard
+      name: homebrew-svg2drawio
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    directory: Casks
+    homepage: https://svg2drawio.runlocal.dev
+    description: Convert SVG files into native draw.io (mxGraph) diagrams
+    # The release binaries are not signed with a Developer ID, so strip the
+    # quarantine flag Gatekeeper sets on downloaded archives.
+    hooks:
+      post:
+        install: |
+          if system_command("/usr/bin/xattr", args: ["-h"]).exit_status == 0
+            system_command "/usr/bin/xattr",
+                           args: ["-dr", "com.apple.quarantine", "#{staged_path}/svg2drawio"]
+          end
+    caveats: |
+      Agent Skill: teach your AI coding tool to drive svg2drawio with
+
+        svg2drawio skill install
+
+    commit_author:
+      name: goreleaserbot
+      email: bot@goreleaser.com

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>svg2drawio — turn SVG files into editable draw.io diagrams</title>
+  <meta name="description" content="A single-binary CLI that converts SVG files into .drawio diagrams made of native draw.io shapes: real rectangles, ellipses, edges and text you can move, restyle and edit.">
+  <link rel="canonical" href="https://svg2drawio.runlocal.dev/">
+
+  <meta name="theme-color" content="#f08705" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f151d" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+
+  <meta name="application-name" content="svg2drawio">
+  <meta name="author" content="Baptiste Collard">
+  <meta name="generator" content="hand-rolled HTML">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="svg2drawio">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://svg2drawio.runlocal.dev/">
+  <meta property="og:title" content="svg2drawio — SVG in, editable draw.io out">
+  <meta property="og:description" content="Convert SVG files into .drawio diagrams whose cells are native draw.io shapes. One binary, no dependencies, MIT licensed.">
+  <meta property="og:image" content="https://svg2drawio.runlocal.dev/assets/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="svg2drawio — SVG in, editable draw.io out">
+  <meta name="twitter:description" content="Convert SVG files into .drawio diagrams whose cells are native draw.io shapes.">
+  <meta name="twitter:image" content="https://svg2drawio.runlocal.dev/assets/og-image.png">
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="1.5" y="4" width="8" height="6" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <rect x="14.5" y="14" width="8" height="6" rx="1.5" fill="#f08705" stroke="#f08705" stroke-width="1.6"/>
+        <path d="M9.5 7h5.5a3 3 0 0 1 3 3v4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+      svg2drawio
+    </a>
+    <nav class="site">
+      <a href="#install">Install</a>
+      <a href="#usage">Usage</a>
+      <a href="#mapping" class="hide-sm">What converts</a>
+      <a href="#agents" class="hide-sm">Agents</a>
+      <a href="https://github.com/bcollard/svg2drawio">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="hero wrap">
+  <h1>SVG in. <span class="accent">Editable draw.io</span> out.</h1>
+  <p class="lede">
+    <code>svg2drawio</code> converts an SVG into a <code>.drawio</code> file whose cells are
+    native draw.io shapes — real rectangles, ellipses, edges with draggable endpoints and
+    text you can retype. Not an embedded picture: a diagram you can keep working on.
+  </p>
+  <div class="cta">
+    <a class="btn btn-primary" href="#install">Install</a>
+    <a class="btn btn-ghost" href="https://github.com/bcollard/svg2drawio">Source on GitHub</a>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <figure class="flow">
+      <svg viewBox="0 0 900 220" role="img" aria-label="An SVG file becomes a draw.io diagram of native cells">
+        <style>
+          .fl-lbl  { font: 600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #16202e; }
+          .fl-sub  { font: 11.5px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #5a6779; }
+          .fl-box  { fill: #ffffff; stroke: #dfe5ee; }
+          .fl-cell { fill: #fff3e0; stroke: #f08705; }
+          .fl-ln   { stroke: #5a6779; stroke-width: 1.6; fill: none; }
+          @media (prefers-color-scheme: dark) {
+            .fl-lbl { fill: #e8eef6; } .fl-sub { fill: #9aa8bb; }
+            .fl-box { fill: #18212d; stroke: #27313f; }
+            .fl-cell { fill: #2a2015; stroke: #ffa029; }
+            .fl-ln { stroke: #9aa8bb; }
+          }
+        </style>
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="#5a6779"/>
+          </marker>
+        </defs>
+
+        <rect class="fl-box" x="10" y="30" width="250" height="160" rx="10" stroke-width="1.5"/>
+        <text class="fl-lbl" x="28" y="56">diagram.svg</text>
+        <text class="fl-sub" x="28" y="80">&lt;rect x="10" y="10" …/&gt;</text>
+        <text class="fl-sub" x="28" y="100">&lt;circle cx="80" …/&gt;</text>
+        <text class="fl-sub" x="28" y="120">&lt;path d="M0 0 C…"/&gt;</text>
+        <text class="fl-sub" x="28" y="140">&lt;text&gt;label&lt;/text&gt;</text>
+        <text class="fl-sub" x="28" y="160">&lt;line … marker-end/&gt;</text>
+
+        <path class="fl-ln" d="M275 110 L355 110" marker-end="url(#a)"/>
+        <text class="fl-sub" x="276" y="98">svg2drawio</text>
+
+        <rect class="fl-box" x="370" y="30" width="250" height="160" rx="10" stroke-width="1.5"/>
+        <text class="fl-lbl" x="388" y="56">diagram.drawio</text>
+        <rect class="fl-cell" x="388" y="70" width="70" height="30" rx="4" stroke-width="1.5"/>
+        <ellipse class="fl-cell" cx="510" cy="85" rx="24" ry="15" stroke-width="1.5"/>
+        <path class="fl-ln" d="M458 85 L482 85" marker-end="url(#a)"/>
+        <rect class="fl-cell" x="388" y="120" width="100" height="26" rx="4" stroke-width="1.5"/>
+        <text class="fl-sub" x="398" y="138">label</text>
+        <path class="fl-ln" d="M500 133 q 40 -20 80 0" marker-end="url(#a)"/>
+
+        <path class="fl-ln" d="M635 110 L715 110" marker-end="url(#a)"/>
+        <text class="fl-sub" x="640" y="98">open</text>
+
+        <rect class="fl-box" x="730" y="30" width="160" height="160" rx="10" stroke-width="1.5"/>
+        <text class="fl-lbl" x="748" y="56">draw.io</text>
+        <text class="fl-sub" x="748" y="80">move</text>
+        <text class="fl-sub" x="748" y="100">restyle</text>
+        <text class="fl-sub" x="748" y="120">retype text</text>
+        <text class="fl-sub" x="748" y="140">reconnect</text>
+        <text class="fl-sub" x="748" y="160">export</text>
+      </svg>
+      <figcaption>Every SVG element lands as its own draw.io cell, in the same place, with the same colours.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="alt" id="install">
+  <div class="wrap">
+    <h2>Install</h2>
+    <p class="sub">A single static binary. macOS and Linux, Intel and Apple Silicon.</p>
+    <pre><code><span class="c"># Homebrew</span>
+<span class="p">brew</span> tap bcollard/svg2drawio
+<span class="p">brew</span> install --cask svg2drawio
+
+<span class="c"># or with a Go toolchain</span>
+<span class="p">go</span> install github.com/bcollard/svg2drawio/cmd/svg2drawio@latest</code></pre>
+  </div>
+</section>
+
+<section id="usage">
+  <div class="wrap">
+    <h2>Usage</h2>
+    <p class="sub">The bare command converts; subcommands cover the rest.</p>
+    <pre><code><span class="c"># One file → diagram.drawio next to it</span>
+<span class="p">svg2drawio</span> diagram.svg
+
+<span class="c"># A tree of icons into one output directory</span>
+<span class="p">svg2drawio</span> -o out/ icons/
+
+<span class="c"># Several SVGs as pages of a single file</span>
+<span class="p">svg2drawio</span> -o all.drawio a.svg b.svg c.svg
+
+<span class="c"># Straight into draw.io's Extras → Edit Diagram box</span>
+<span class="p">svg2drawio</span> -o - diagram.svg | pbcopy
+
+<span class="c"># An mxGraph shape library instead of a diagram</span>
+<span class="p">svg2drawio</span> stencil --name mesh -o mesh.xml icons/</code></pre>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>Why not just import the SVG?</h2>
+    <p class="sub">draw.io can place an SVG on the canvas, but it stays one opaque picture.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Real cells, not a picture</h3>
+        <p>Each shape is its own <code>mxCell</code> with its own fill, stroke and geometry. Select it, move it, recolour it.</p>
+      </div>
+      <div class="card">
+        <h3>Connectors stay connectors</h3>
+        <p>Lines, polylines and straight paths become edges with draggable endpoints and waypoints; SVG markers become arrowheads.</p>
+      </div>
+      <div class="card">
+        <h3>Text stays text</h3>
+        <p>Font family, size, weight, colour and alignment carry over into editable labels — no re-typing, no bitmap text.</p>
+      </div>
+      <div class="card">
+        <h3>Curves become native shapes</h3>
+        <p>Arbitrary paths are emitted as inline stencils, the same object draw.io writes for its own custom shapes.</p>
+      </div>
+      <div class="card">
+        <h3>CSS is resolved first</h3>
+        <p>Class-driven SVGs from design tools and LLMs work: <code>&lt;style&gt;</code> rules are applied through the cascade before conversion.</p>
+      </div>
+      <div class="card">
+        <h3>One binary, no runtime</h3>
+        <p>Pure Go, no dependencies, MIT licensed. Runs in CI as easily as on a laptop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mapping">
+  <div class="wrap">
+    <h2>What converts</h2>
+    <p class="sub">The mapping from SVG to draw.io, element by element.</p>
+    <table class="map">
+      <thead><tr><th>SVG</th><th>draw.io</th></tr></thead>
+      <tbody>
+        <tr><td><code>rect</code> (with <code>rx</code>/<code>ry</code>)</td><td>native rectangle, rounded with an absolute arc size</td></tr>
+        <tr><td><code>circle</code>, <code>ellipse</code></td><td>native ellipse</td></tr>
+        <tr><td><code>line</code>, open <code>polyline</code>, straight <code>path</code></td><td>edge with floating endpoints and waypoints</td></tr>
+        <tr><td><code>polygon</code>, curved or filled <code>path</code></td><td>vertex with an inline stencil</td></tr>
+        <tr><td><code>text</code>, <code>tspan</code></td><td>text cell with font family, size, colour, weight and alignment</td></tr>
+        <tr><td><code>image</code></td><td><code>shape=image</code>, data URIs rewritten the way draw.io stores them</td></tr>
+        <tr><td><code>g</code></td><td>draw.io group, children rebased on the group origin</td></tr>
+        <tr><td><code>use</code>, <code>symbol</code></td><td>expanded before conversion</td></tr>
+        <tr><td>gradients</td><td><code>fillColor</code> + <code>gradientColor</code> + <code>gradientDirection</code></td></tr>
+        <tr><td><code>marker-start</code>, <code>marker-end</code></td><td>block arrowheads on the edge</td></tr>
+        <tr><td><code>transform</code></td><td>baked into coordinates; rotation survives as <code>rotation=</code></td></tr>
+        <tr><td><code>viewBox</code>, <code>width</code>, <code>height</code></td><td>page size and user-unit scale</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="alt" id="agents">
+  <div class="wrap">
+    <h2>For AI coding agents</h2>
+    <p class="sub">
+      svg2drawio ships an Agent Skill, so tools like Claude Code know when and how to
+      use it without being told each session.
+    </p>
+    <pre><code><span class="p">svg2drawio</span> skill install        <span class="c"># → ~/.claude/skills/svg2drawio/SKILL.md</span>
+<span class="p">svg2drawio</span> skill install --print <span class="c"># write it anywhere you like</span></code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Questions</h2>
+
+    <details>
+      <summary>Is this the old jgraph/svg2xml?</summary>
+      <p>
+        No. That Java tool produced mxGraph <em>stencil libraries</em> — shape palettes, not
+        diagrams you open. svg2drawio is a Go rewrite whose default output is a real
+        <code>.drawio</code> diagram; the stencil-library output is still available under
+        <code>svg2drawio stencil</code>.
+      </p>
+    </details>
+
+    <details>
+      <summary>What does not survive the conversion?</summary>
+      <p>
+        <code>clipPath</code>, <code>mask</code>, <code>filter</code> and pattern fills are
+        ignored, <code>fill-rule="evenodd"</code> has no mxGraph equivalent, and text on a
+        path is placed at its anchor point. Text box sizes are estimated, because draw.io
+        lays text out itself — a long label may need a nudge after import.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does it phone home?</summary>
+      <p>
+        No. It reads files and writes files. No network access, no telemetry, nothing
+        uploaded to a conversion service.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I check the result into git?</summary>
+      <p>
+        Yes — the output is plain XML with stable ids, so diffs are readable. Keep the
+        source SVG next to it; the conversion is one-way.
+      </p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>MIT licensed · built by Baptiste Collard</span>
+    <span class="spacer"></span>
+    <a href="https://github.com/bcollard/svg2drawio">GitHub</a>
+    <a href="https://github.com/bcollard/svg2drawio/releases">Releases</a>
+    <a href="https://github.com/bcollard/svg2drawio/blob/main/SKILL.md">Agent Skill</a>
+  </div>
+</footer>
+
+</body>
+</html>

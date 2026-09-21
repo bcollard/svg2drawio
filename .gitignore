@@ -1,0 +1,6 @@
+bin/
+dist/
+.third_party_licenses/
+*.drawio
+!testdata/*.drawio
+.DS_Store

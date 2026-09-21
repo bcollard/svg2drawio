@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write  # create the GitHub release and upload assets
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0  # full history so goreleaser can build the changelog
+
+      - uses: actions/setup-go@v5.3.0
+        with:
+          go-version: 'stable'
+          cache: true
+
+      - name: Collect third-party licenses
+        run: |
+          go install github.com/google/go-licenses@latest
+          go-licenses save ./cmd/svg2drawio \
+            --save_path=.third_party_licenses \
+            --force
+
+      - name: Install syft (SBOM generator for goreleaser)
+        uses: anchore/sbom-action/download-syft@v0
+
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v6.3.0
+        with:
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Fine-grained PAT with contents:write on bcollard/homebrew-svg2drawio,
+          # so goreleaser can push the updated cask to the tap.
+          HOMEBREW_TAP_GITHUB_TOKEN: ${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}

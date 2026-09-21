@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="go-svg2xml" agent="go-svg2xml" type="device">
+  <diagram id="page-1" name="kuma-dns-workflow">
+    <mxGraphModel dx="1422" dy="798" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="s2x-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1440" height="1075" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-2" value="Kuma 2.14.5 — how a DNS lookup is resolved (default Helm values)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=23;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="19.58" width="941.16" height="28.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-3" value="chart kuma/kuma 2.14.5, no overrides · verified on a kind cluster, 2026-09-21" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#64748b;fontSize=13;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="40" y="55.33" width="628.68" height="16.25" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-4" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=8;fillColor=#f8fafc;strokeColor=#94a3b8;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="95" width="380" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-5" value="Helm values — defaults" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=14;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="58" y="108.35" width="208.32" height="17.5" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-6" value="injector.builtinDNS.enabled: true" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#1e293b;fontSize=12;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="58" y="138.3" width="245.52" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-7" value="injector.builtinDNS.port: 15053" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#1e293b;fontSize=12;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="58" y="160.3" width="230.64" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-8" value="injector.builtinDNS.experimentalProxy: true" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#1e293b;fontSize=12;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="58" y="182.3" width="319.92" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-9" value="experimentalProxy selects the in-process DNS proxy" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="58" y="207.28" width="341" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-10" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=8;fillColor=#ecfdf5;strokeColor=#10b981;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="480" y="95" width="560" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-11" value="kuma-control-plane" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=14;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="498" y="108.35" width="156.24" height="17.5" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-12" value="mutating webhook injects kuma-init and the kuma-sidecar container" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="498" y="136.3" width="483.6" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-13" value="sidecar args: run --log-level=info" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="498" y="159.28" width="231.88" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-14" style="endArrow=none;html=1;rounded=0;strokeColor=#6ee7b7;strokeWidth=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="498" y="182" as="sourcePoint" />
+            <mxPoint x="1022" y="182" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s2x-15" value="DNSGenerator: the DP advertises feature-embedded-dns, so the CP ships" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="498" y="192.3" width="513.36" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-16" value="the record list as a JSON route /dns rather than a DNS listener" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="498" y="212.3" width="468.72" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-17" style="endArrow=block;html=1;rounded=0;endFill=1;strokeColor=#334155;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="165" as="sourcePoint" />
+            <mxPoint x="472" y="165" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s2x-18" value="CP env" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="425.54" y="145.28" width="40.92" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-19" style="endArrow=block;html=1;rounded=0;endFill=1;strokeColor=#334155;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="760" y="235" as="sourcePoint" />
+            <mxPoint x="760" y="314" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s2x-20" value="xDS" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="772" y="247.28" width="20.46" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-21" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=8;fillColor=#fffbeb;strokeColor=#f59e0b;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1075" y="420" width="330" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-22" value="kube-dns / CoreDNS" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=14;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="432.35" width="156.24" height="17.5" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-23" value="10.x.0.10:53" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="461.28" width="81.84" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-24" value="the nameserver taken from" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="488.3" width="186" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-25" value="the pod&apos;s /etc/resolv.conf" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="510.3" width="193.44" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-26" value="resolves example.com and" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="538.3" width="178.56" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-27" value="every other public name" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="560.3" width="171.12" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-28" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=10;fillColor=#ffffff;strokeColor=#64748b;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="280" width="1000" height="612" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-29" value="Pod — namespace labelled kuma.io/sidecar-injection: enabled" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=14;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="58" y="294.35" width="529.48" height="17.5" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-30" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=8;fillColor=#f8fafc;strokeColor=#cbd5e1;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="62" y="400" width="220" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-31" value="app container" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=13;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="78" y="413.33" width="104.78" height="16.25" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-32" value="nslookup" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="78" y="439.28" width="54.56" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-33" value="nginx_demo_svc_80.mesh" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="78" y="457.28" width="150.04" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-34" value="resolved from the local map" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="78" y="477.28" width="184.14" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-35" value="nslookup example.com" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="78" y="503.28" width="136.4" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-36" value="forwarded upstream" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="78" y="523.28" width="122.76" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-37" value="resolv.conf → 10.x.0.10:53" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="78" y="550.3" width="208.32" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-38" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=8;fillColor=#f1f5f9;strokeColor=#cbd5e1;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="62" y="630" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-39" value="1 · kuma-init" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=13;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="78" y="643.33" width="112.84" height="16.25" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-40" value="--redirect-all-dns-traffic" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="78" y="669.28" width="177.32" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-41" value="installs the iptables rules" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="78" y="696.3" width="200.88" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-42" value="that rewrite every udp/tcp" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="78" y="718.3" width="193.44" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-43" value=":53 packet to port 15053" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="78" y="740.3" width="178.56" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-44" style="endArrow=block;html=1;rounded=0;endFill=1;strokeColor=#334155;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="282" y="475" as="sourcePoint" />
+            <mxPoint x="348" y="475" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s2x-45" value="2" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#1d4ed8;fontSize=14;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="487.35" width="10" height="17.5" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-46" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=8;fillColor=#eff6ff;strokeColor=#3b82f6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="320" y="320" width="700" height="542" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-47" value="kuma-sidecar container" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=13;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="338" y="333.33" width="177.32" height="16.25" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-48" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=6;fillColor=#e0ecfe;strokeColor=#2563eb;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="338" y="360" width="664" height="356" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-49" value="kuma-dp process (Go)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=13;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="356" y="371.33" width="161.2" height="16.25" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-50" value="args: run --log-level=info" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="356" y="393.28" width="177.32" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-51" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=6;fillColor=#dbeafe;strokeColor=#2563eb;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="356" y="414" width="628" height="195" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-52" value="3 · embedded DNS proxy — github.com/miekg/dns" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=13;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="372" y="425.33" width="386.88" height="16.25" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-53" value="goroutine inside kuma-dp, listens udp + tcp" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="372" y="447.28" width="293.26" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-54" style="endArrow=none;html=1;rounded=0;strokeColor=#93c5fd;strokeWidth=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="396" y="492" as="sourcePoint" />
+            <mxPoint x="968" y="492" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s2x-55" value="5 · look the name up in the in-memory dnsMap" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="396" y="500.3" width="334.8" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-56" value="6 hit → authoritative answer A 240.0.0.0, never leaves the pod" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#047857;fontSize=12;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="396" y="524.3" width="476.16" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-57" value="7 miss → forward to the resolv.conf nameserver" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#1e293b;fontSize=12;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="396" y="548.3" width="357.12" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-58" value="every query is logged at V(1) — raise the log level to see it" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="396" y="575.28" width="429.66" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-59" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=6;fillColor=#f8fafc;strokeColor=#cbd5e1;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="356" y="628" width="628" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-60" value="4 · config-fetcher (kuma-dp goroutine)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=13;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="372" y="639.33" width="314.34" height="16.25" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-61" value="HTTP GET /dns every 1s → ReloadMap() swaps the dnsMap atomically" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="372" y="665.28" width="450.12" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-62" style="endArrow=block;html=1;rounded=0;endFill=1;strokeColor=#334155;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="628" as="sourcePoint" />
+            <mxPoint x="500" y="613" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s2x-63" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=6;fillColor=#f8fafc;strokeColor=#94a3b8;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="338" y="746" width="664" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-64" value="Envoy process (same container)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=13;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="356" y="759.33" width="241.8" height="16.25" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-65" value="dynamic-config route /dns — the record list as a static JSON blob, ttl 30" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="356" y="784.3" width="558" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-66" value="a config endpoint; name resolution happens entirely inside kuma-dp" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="356" y="809.28" width="450.12" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-67" style="endArrow=block;html=1;rounded=0;endFill=1;strokeColor=#334155;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="694" as="sourcePoint" />
+            <mxPoint x="600" y="738" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s2x-68" value="GET /dns" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="612" y="701.28" width="54.56" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-69" style="endArrow=block;html=1;rounded=0;endFill=1;strokeColor=#94a3b8;strokeWidth=1.5;dashed=1;dashPattern=3.33 2.67;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="790" y="738" as="sourcePoint" />
+            <mxPoint x="790" y="698" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s2x-70" value="JSON" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="802" y="701.28" width="27.28" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-71" style="endArrow=block;html=1;rounded=0;endFill=1;strokeColor=#334155;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="984" y="500" as="sourcePoint" />
+            <mxPoint x="1067" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s2x-72" value="7" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#1d4ed8;fontSize=14;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1021" y="476.35" width="10" height="17.5" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-73" style="endArrow=block;html=1;rounded=0;endFill=1;strokeColor=#94a3b8;strokeWidth=1.5;dashed=1;dashPattern=3.33 2.67;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1067" y="532" as="sourcePoint" />
+            <mxPoint x="986" y="532" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s2x-74" value="answer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#475569;fontSize=11;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="1005.54" y="539.28" width="40.92" height="13.75" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-75" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=3;fillColor=#ffffff;strokeColor=#64748b;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="264" y="466" width="36" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-76" value=":53" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=10;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="272.7" y="469.25" width="18.6" height="12.5" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-77" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=3;fillColor=#ffffff;strokeColor=#64748b;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="327" y="466" width="58" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-78" value=":15053" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=10;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="337.4" y="469.25" width="37.2" height="12.5" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-79" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=3;fillColor=#ffffff;strokeColor=#64748b;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1057" y="467" width="36" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-80" value=":53" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=10;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="1065.7" y="470.25" width="18.6" height="12.5" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-81" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=3;fillColor=#ffffff;strokeColor=#64748b;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="737" width="80" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-82" value="unix socket" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=10;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="645.9" y="740.25" width="68.2" height="12.5" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-83" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=8;fillColor=#f0f9ff;strokeColor=#0ea5e9;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="917" width="1360" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-84" value="Seeing the queries" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0f172a;fontSize=14;fontFamily=-apple-system;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="930.35" width="156.24" height="17.5" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-85" value="Every lookup is logged at V(1). Raise the sidecar&apos;s log level with a ContainerPatch in the CP namespace, referenced by kuma.io/container-patches:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#334155;fontSize=12;fontFamily=-apple-system;" vertex="1" parent="1">
+          <mxGeometry x="60" y="958.3" width="1078.8" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-86" value="sidecarPatch: [{op: replace, path: /args/1, value: &apos;&quot;--log-level=debug&quot;&apos;}]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#1e293b;fontSize=12;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="60" y="984.3" width="550.56" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="s2x-87" value="DEBUG dnsproxy got request {&quot;type&quot;: 1, &quot;name&quot;: &quot;example.com.&quot;, &quot;entry&quot;: null}" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#1e293b;fontSize=12;fontFamily=SF Mono;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1010.3" width="572.88" height="15" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

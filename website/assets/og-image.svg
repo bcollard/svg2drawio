@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="1200" height="630" fill="#10171f"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#f08705"/>
+
+  <g transform="translate(88,96)">
+    <rect x="0" y="0" width="44" height="32" rx="7" fill="none" stroke="#e8eef6" stroke-width="5"/>
+    <rect x="52" y="40" width="44" height="32" rx="7" fill="#f08705"/>
+    <path d="M44 16h22a14 14 0 0 1 14 14v10" fill="none" stroke="#e8eef6" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <text x="200" y="140" fill="#e8eef6" font-size="46" font-weight="700" letter-spacing="-1">svg2drawio</text>
+
+  <text x="88" y="288" fill="#ffffff" font-size="74" font-weight="700" letter-spacing="-2">SVG in.</text>
+  <text x="88" y="376" fill="#ffa029" font-size="74" font-weight="700" letter-spacing="-2">Editable draw.io out.</text>
+
+  <text x="88" y="452" fill="#9aa8bb" font-size="29">Every shape becomes a native draw.io cell — move it, restyle it, retype it.</text>
+
+  <g transform="translate(88,506)">
+    <rect x="0" y="0" width="560" height="62" rx="10" fill="#0a0f16" stroke="#27313f" stroke-width="2"/>
+    <text x="26" y="40" fill="#e7edf5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="24">
+      <tspan fill="#ffa029">$</tspan> svg2drawio diagram.svg
+    </text>
+  </g>
+
+  <g transform="translate(720,470)" opacity="0.95">
+    <rect x="0" y="0" width="120" height="44" rx="6" fill="#2a2015" stroke="#ffa029" stroke-width="2.5"/>
+    <ellipse cx="240" cy="22" rx="36" ry="22" fill="#2a2015" stroke="#ffa029" stroke-width="2.5"/>
+    <path d="M120 22 L200 22" stroke="#9aa8bb" stroke-width="2.5" fill="none"/>
+    <path d="M196 15 L206 22 L196 29 z" fill="#9aa8bb"/>
+    <rect x="0" y="72" width="280" height="40" rx="6" fill="#18212d" stroke="#27313f" stroke-width="2.5"/>
+    <text x="16" y="98" fill="#9aa8bb" font-size="19">label stays editable</text>
+  </g>
+</svg>

@@ -1,0 +1,62 @@
+name: Deploy website to GCS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'website/**'
+      - '.github/workflows/deploy-website.yaml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # Needed for Workload Identity Federation
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    env:
+      BUCKET: svg2drawio.runlocal.dev
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Auth via Workload Identity Federation
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: 'projects/681025799424/locations/global/workloadIdentityPools/gitops-pool/providers/gh-provider'
+          service_account: 'gha-push-gcs-svg2drawio@personal-218506.iam.gserviceaccount.com'
+
+      - name: Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          version: '>= 446.0.0'
+
+      - name: Sync website/ -> gs://${{ env.BUCKET }}
+        # -m parallel; -r recursive; -d mirror (delete server-side files not
+        # present locally). -x excludes the ephemeral WIF credentials files
+        # google-github-actions/auth writes into $GITHUB_WORKSPACE, so they can
+        # never be published to the bucket. cicd/ is build tooling, not content.
+        run: |
+          gsutil -m rsync -r -d \
+            -x '(^|/)gha-creds-.*\.json$|^cicd/' \
+            website gs://${BUCKET}
+
+      - name: Set cache control on static assets
+        shell: bash
+        run: |
+          # Short cache so deploys propagate fast.
+          gsutil -m setmeta -h 'Cache-Control:public, max-age=600' "gs://${BUCKET}/index.html" || true
+          gsutil -m setmeta -h 'Cache-Control:public, max-age=600' "gs://${BUCKET}/404.html"   || true
+          gsutil -m setmeta -h 'Cache-Control:public, max-age=600' "gs://${BUCKET}/styles.css" || true
+          # Longer cache for images — they are versioned implicitly by name.
+          gsutil -m setmeta -h 'Cache-Control:public, max-age=86400' "gs://${BUCKET}/assets/**.png" || true
+          gsutil -m setmeta -h 'Cache-Control:public, max-age=86400' "gs://${BUCKET}/assets/**.svg" || true
+
+      - name: Summary
+        run: |
+          echo "Deployed website to gs://${BUCKET}/" >> $GITHUB_STEP_SUMMARY
+          echo "URL: https://svg2drawio.runlocal.dev/" >> $GITHUB_STEP_SUMMARY
