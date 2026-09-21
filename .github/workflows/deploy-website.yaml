@@ -18,7 +18,7 @@ jobs:
       id-token: 'write'
 
     env:
-      BUCKET: svg2drawio.runlocal.dev
+      BUCKET: svg2drawio-runlocal-dev
 
     steps:
       - name: Checkout

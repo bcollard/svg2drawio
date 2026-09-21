@@ -26,9 +26,13 @@ website/
 ## Deploy
 
 `.github/workflows/deploy-website.yaml` mirrors `website/` into
-`gs://svg2drawio.runlocal.dev` on every push to `main` that touches this
+`gs://svg2drawio-runlocal-dev` on every push to `main` that touches this
 directory. It authenticates with Workload Identity Federation — no service
 account keys. `cicd/` is excluded from the rsync.
+
+The bucket is not domain-named: `svg2drawio.runlocal.dev` is served by the
+shared HTTPS load balancer managed in the `gcp-load-balancer-bco` repo (backend
+bucket, managed certificate, host rule), which references the bucket by name.
 
 Run `cicd/setup-gcp-wif.sh` once to create the bucket, the service account and
 the repo binding.

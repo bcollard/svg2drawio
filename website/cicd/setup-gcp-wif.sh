@@ -14,7 +14,10 @@ set -euo pipefail
 PROJECT_ID="personal-218506"
 SA_NAME="gha-push-gcs-svg2drawio"
 SA_EMAIL="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
-BUCKET="svg2drawio.runlocal.dev"
+# Not domain-named: GCS requires Search Console ownership verification of the
+# exact FQDN for that, and traffic only ever arrives via the HTTPS load
+# balancer, which references the bucket by name.
+BUCKET="svg2drawio-runlocal-dev"
 LOCATION="europe-west1"
 WI_POOL="gitops-pool"                  # reused from the blog / claude-status / klimax
 WI_PROVIDER="gh-provider"              # reused
@@ -136,7 +139,7 @@ echo "service_account:            ${SA_EMAIL}"
 echo "bucket:                     gs://${BUCKET}"
 echo
 echo "Next:"
-echo "  1. svg2drawio.runlocal.dev is a subdomain, so a CNAME to"
-echo "     c.storage.googleapis.com works (no load balancer needed), or front"
-echo "     it with the existing HTTPS load balancer for a managed certificate."
+echo "  1. svg2drawio.runlocal.dev is served by the shared HTTPS load balancer"
+echo "     managed in the gcp-load-balancer-bco repo (backend bucket + managed"
+echo "     cert + host rule). Its DNS A record points at 35.227.220.156."
 echo "  2. Push to main with changes under website/ to trigger the deploy."
