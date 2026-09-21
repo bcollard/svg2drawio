@@ -123,27 +123,6 @@ func TestSeveralInputsToOneFileBecomePages(t *testing.T) {
 	}
 }
 
-func TestStencilCommandWritesALibrary(t *testing.T) {
-	dir := t.TempDir()
-	a := writeSVG(t, dir, "one.svg")
-	b := writeSVG(t, dir, "two.svg")
-	out := filepath.Join(dir, "lib.xml")
-
-	run(t, "stencil", "-q", "--name", "icons", "-o", out, a, b)
-
-	data, err := os.ReadFile(out)
-	if err != nil {
-		t.Fatal(err)
-	}
-	s := string(data)
-	if !strings.Contains(s, `<shapes name="icons">`) {
-		t.Errorf("missing library root:\n%s", s)
-	}
-	if !strings.Contains(s, `name="icons.one"`) || !strings.Contains(s, `name="icons.two"`) {
-		t.Errorf("shapes are not named after the inputs:\n%s", s)
-	}
-}
-
 func TestScaleFlagIsApplied(t *testing.T) {
 	dir := t.TempDir()
 	in := writeSVG(t, dir, "a.svg")

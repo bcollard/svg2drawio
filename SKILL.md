@@ -1,6 +1,6 @@
 ---
 name: svg2drawio
-description: "Convert SVG files into native draw.io (mxGraph) diagrams or stencil libraries with the svg2drawio CLI. Use whenever an SVG has to become an editable .drawio file — architecture diagrams, workflow pictures, icon sets — instead of embedding the SVG as an image, hand-writing mxGraph XML, or asking the user to redraw it."
+description: "Convert SVG files into native draw.io (mxGraph) diagrams with the svg2drawio CLI. Use whenever an SVG has to become an editable .drawio file — architecture diagrams, workflow pictures, icon sets — instead of embedding the SVG as an image, hand-writing mxGraph XML, or asking the user to redraw it."
 metadata:
   category: "diagrams"
   requires:
@@ -40,7 +40,6 @@ go install github.com/bcollard/svg2drawio/cmd/svg2drawio@latest
 ```bash
 svg2drawio <input.svg|dir>...           # convert to .drawio (the default action)
 svg2drawio convert <input>...           # same thing, explicit; alias: diagram
-svg2drawio stencil <input>...           # mxGraph shape library instead; alias: library
 svg2drawio version                      # version + build signature; --short for the number alone
 svg2drawio skill install                # install this skill into ~/.claude/skills/svg2drawio
 svg2drawio skill path                   # where that skill would live
@@ -48,7 +47,7 @@ svg2drawio completion <shell>           # bash | zsh | fish | powershell
 svg2drawio help [command]               # help for any command
 ```
 
-## Flags (convert and stencil)
+## Flags
 
 | Flag | Default | Effect |
 | --- | --- | --- |
@@ -57,7 +56,7 @@ svg2drawio help [command]               # help for any command
 | `--scale` | `1` | Multiplies every coordinate |
 | `--no-groups` | off | Flattens SVG groups instead of keeping draw.io groups |
 | `--no-edges` | off | Lines and polylines become shapes instead of edges |
-| `--name` | file name | Diagram page name, or stencil library name |
+| `--name` | file name | Diagram page name |
 | `-q`, `--quiet` | off | Suppresses the per-file output line |
 
 ## Recipes
@@ -84,12 +83,6 @@ Pipe straight into draw.io's **Extras → Edit Diagram** box:
 
 ```bash
 svg2drawio -o - diagram.svg | pbcopy
-```
-
-Build a shape library to load with **Extras → Edit Shape Library**:
-
-```bash
-svg2drawio stencil --name mesh -o mesh-shapes.xml icons/
 ```
 
 ## Rules for agents
@@ -135,4 +128,3 @@ import.
 | A shape is missing | It was hidden (`display:none`), inside `<defs>` without a `<use>`, or filled with a `pattern`. |
 | Text overflows its box | Expected: box sizes are estimated. Resize in draw.io, or accept it. |
 | "no .svg files found" | The path had no `.svg` files; the walk is extension-based and case-insensitive. |
-| Everything is one giant stencil | You ran `stencil`; use the default `convert` for an editable diagram. |

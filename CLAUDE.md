@@ -1,18 +1,17 @@
 # svg2drawio
 
-Go CLI that converts SVG files into draw.io (mxGraph) XML. Default output is a
-`.drawio` diagram of native draw.io cells; `svg2drawio stencil` emits an mxGraph
-shape library instead (the format the original Java jgraph/svg2xml produced).
+Go CLI that converts SVG files into a `.drawio` diagram of native draw.io
+cells.
 
 ## Layout
 
 | Path | What lives there |
 | --- | --- |
 | `cmd/svg2drawio/` | `main`, build-info vars stamped by ldflags |
-| `internal/cli/` | cobra commands: root/convert/stencil/version/skill |
+| `internal/cli/` | cobra commands: root/convert/version/skill |
 | `internal/svgdom/` | SVG parse, `use`/`symbol` expansion, transforms, colours, CSS cascade |
 | `internal/svgpath/` | path `d` parsing, arcs → cubics, transforms, exact bounds |
-| `internal/stencil/` | stencil XML + the `shape=stencil(...)` encoding |
+| `internal/stencil/` | inline stencil XML + the `shape=stencil(...)` encoding |
 | `internal/mxgraph/` | `.drawio` file model (mxfile / mxGraphModel / mxCell) |
 | `internal/convert/` | the SVG → draw.io mapping |
 | `skill.go` + `SKILL.md` | the Agent Skill, embedded into the binary |

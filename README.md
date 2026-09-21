@@ -8,10 +8,6 @@ edges with draggable endpoints, text is a text cell with its own font settings.
 Arbitrary paths become inline stencils (`shape=stencil(...)`), which draw.io
 renders as first class shapes with editable fill and stroke.
 
-The original [jgraph/svg2xml](https://github.com/jgraph/svg2xml) (Java, Swing
-GUI) only produced mxGraph *stencil libraries*. That output is available here
-too, under `svg2drawio stencil`.
-
 Website: <https://svg2drawio.runlocal.dev>
 
 ## Install
@@ -43,14 +39,13 @@ svg2drawio [flags] <input.svg|directory>...
 | --- | --- |
 | `svg2drawio <input>...` | Convert to `.drawio` — the default action |
 | `svg2drawio convert <input>...` | The same thing, explicit (alias: `diagram`) |
-| `svg2drawio stencil <input>...` | An mxGraph shape library instead (alias: `library`) |
 | `svg2drawio version` | Version and build signature; `--short` for the number alone |
 | `svg2drawio skill install` | Install the Agent Skill for AI coding tools |
 | `svg2drawio skill path` | Where that skill is installed |
 | `svg2drawio completion <shell>` | bash, zsh, fish or powershell completions |
 | `svg2drawio help [command]` | Help for any command |
 
-Flags for `convert` and `stencil`:
+Flags for `convert`:
 
 | Flag | Default | Meaning |
 | --- | --- | --- |
@@ -59,7 +54,7 @@ Flags for `convert` and `stencil`:
 | `--scale` | `1` | Multiplies every coordinate |
 | `--no-groups` | off | Flattens SVG groups instead of keeping draw.io groups |
 | `--no-edges` | off | Converts lines and polylines to shapes instead of edges |
-| `--name` | file name | Name of the diagram page or the stencil library |
+| `--name` | file name | Name of the diagram page |
 | `-q`, `--quiet` | off | Suppresses the per-file output line |
 
 Examples:
@@ -68,7 +63,6 @@ Examples:
 svg2drawio diagram.svg                        # writes diagram.drawio next to it
 svg2drawio -o out/ icons/                     # converts a tree of SVGs
 svg2drawio -o all.drawio a.svg b.svg c.svg    # one file, one page per SVG
-svg2drawio stencil -o icons.xml icons/        # a shape library to import
 svg2drawio -o - diagram.svg | pbcopy          # paste into Extras > Edit Diagram
 ```
 

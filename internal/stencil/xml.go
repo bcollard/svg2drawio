@@ -31,21 +31,6 @@ type Shape struct {
 	StrokeWidth string // "inherit" lets the cell style drive the stroke width
 	Background  []Elem
 	Foreground  []Elem
-	Connections []Constraint
-}
-
-// Constraint is a fixed connection point on a stencil.
-type Constraint struct {
-	Name      string
-	X, Y      float64
-	Perimeter bool
-	Decimals  int
-}
-
-// Library is a named set of stencils, the format of a draw.io shape library.
-type Library struct {
-	Name   string
-	Shapes []*Shape
 }
 
 // XML renders the stencil as a standalone <shape> document.
@@ -76,27 +61,6 @@ func (s *Shape) write(b *strings.Builder, indent bool, depth int) {
 	writeAttr(b, "strokewidth", strokeWidth)
 	b.WriteString(">")
 	nl(b, indent)
-
-	if len(s.Connections) > 0 {
-		pad(b, indent, depth+1)
-		b.WriteString("<connections>")
-		nl(b, indent)
-		for _, c := range s.Connections {
-			pad(b, indent, depth+2)
-			b.WriteString("<constraint")
-			if c.Name != "" {
-				writeAttr(b, "name", c.Name)
-			}
-			writeAttr(b, "x", Num(c.X))
-			writeAttr(b, "y", Num(c.Y))
-			writeAttr(b, "perimeter", boolAttr(c.Perimeter))
-			b.WriteString("/>")
-			nl(b, indent)
-		}
-		pad(b, indent, depth+1)
-		b.WriteString("</connections>")
-		nl(b, indent)
-	}
 
 	writeSection(b, "background", s.Background, indent, depth+1)
 	writeSection(b, "foreground", s.Foreground, indent, depth+1)
@@ -147,23 +111,6 @@ func (e Elem) write(b *strings.Builder, indent bool, depth int) {
 	nl(b, indent)
 }
 
-// XML renders the library as a <shapes> document with an XML declaration.
-func (l *Library) XML() string {
-	var b strings.Builder
-	b.WriteString(`<?xml version="1.0" encoding="UTF-8"?>` + "\n")
-	b.WriteString("<shapes")
-	if l.Name != "" {
-		writeAttr(&b, "name", l.Name)
-	}
-	b.WriteString(">\n")
-	for _, s := range l.Shapes {
-		s.write(&b, true, 1)
-		b.WriteString("\n")
-	}
-	b.WriteString("</shapes>\n")
-	return b.String()
-}
-
 func pad(b *strings.Builder, indent bool, depth int) {
 	if indent {
 		b.WriteString(strings.Repeat("  ", depth))
@@ -178,13 +125,6 @@ func nl(b *strings.Builder, indent bool) {
 
 func writeAttr(b *strings.Builder, name, value string) {
 	b.WriteString(" " + name + `="` + Escape(value) + `"`)
-}
-
-func boolAttr(v bool) string {
-	if v {
-		return "1"
-	}
-	return "0"
 }
 
 // Escape encodes a string for use in an XML attribute value.

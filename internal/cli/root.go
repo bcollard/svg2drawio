@@ -28,8 +28,7 @@ const rootLong = `svg2drawio converts SVG files into draw.io (mxGraph) XML.
 The default output is a .drawio diagram whose cells are native draw.io shapes:
 rectangles stay rectangles, circles stay ellipses, connectors become edges with
 draggable endpoints, and arbitrary paths become inline stencils that draw.io
-renders as first class shapes. Use the stencil command for an mxGraph shape
-library instead.`
+renders as first class shapes.`
 
 const rootExample = `  # A .drawio file next to the input
   svg2drawio diagram.svg
@@ -41,10 +40,7 @@ const rootExample = `  # A .drawio file next to the input
   svg2drawio -o all.drawio a.svg b.svg c.svg
 
   # Straight to the clipboard, ready for Extras > Edit Diagram
-  svg2drawio -o - diagram.svg | pbcopy
-
-  # A draw.io shape library
-  svg2drawio stencil -o icons.xml icons/`
+  svg2drawio -o - diagram.svg | pbcopy`
 
 // NewRootCmd builds the root command. Running it with SVG arguments converts
 // them, which keeps the common case a single word.
@@ -72,7 +68,6 @@ func NewRootCmd() *cobra.Command {
 
 	root.AddCommand(
 		newConvertCmd(),
-		newStencilCmd(),
 		newVersionCmd(),
 		newSkillCmd(),
 	)

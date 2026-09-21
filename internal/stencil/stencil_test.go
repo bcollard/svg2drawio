@@ -70,17 +70,6 @@ func TestCompressIsURIEncodedBeforeDeflate(t *testing.T) {
 	}
 }
 
-func TestLibraryXML(t *testing.T) {
-	lib := &Library{Name: "icons", Shapes: []*Shape{{Name: "icons.one", W: 4, H: 4}}}
-	got := lib.XML()
-	if !strings.HasPrefix(got, `<?xml version="1.0" encoding="UTF-8"?>`) {
-		t.Error("library is missing the XML declaration")
-	}
-	if !strings.Contains(got, `<shapes name="icons">`) || !strings.Contains(got, `name="icons.one"`) {
-		t.Errorf("library XML:\n%s", got)
-	}
-}
-
 func TestNumAvoidsScientificNotation(t *testing.T) {
 	if got := Num(0.0000001); strings.Contains(got, "e") {
 		t.Errorf("Num = %q, should not use scientific notation", got)

@@ -51,49 +51,6 @@ func FillStroke(hasFill, hasStroke bool) (Elem, bool) {
 	return Elem{}, false
 }
 
-// Rect returns a stencil <rect> element.
-func Rect(x, y, w, h float64, decimals int) Elem {
-	n := func(v float64) string { return Num(Round(v, decimals)) }
-	return Elem{Name: "rect", Attrs: []Attr{
-		{"x", n(x)}, {"y", n(y)}, {"w", n(w)}, {"h", n(h)},
-	}}
-}
-
-// RoundRect returns a stencil <roundrect> element. arcSize is a percentage of
-// the smaller side, matching mxStencil's reading of the attribute.
-func RoundRect(x, y, w, h, arcSize float64, decimals int) Elem {
-	n := func(v float64) string { return Num(Round(v, decimals)) }
-	return Elem{Name: "roundrect", Attrs: []Attr{
-		{"x", n(x)}, {"y", n(y)}, {"w", n(w)}, {"h", n(h)},
-		{"arcsize", n(arcSize)},
-	}}
-}
-
-// Ellipse returns a stencil <ellipse> element.
-func Ellipse(x, y, w, h float64, decimals int) Elem {
-	n := func(v float64) string { return Num(Round(v, decimals)) }
-	return Elem{Name: "ellipse", Attrs: []Attr{
-		{"x", n(x)}, {"y", n(y)}, {"w", n(w)}, {"h", n(h)},
-	}}
-}
-
-// Image returns a stencil <image> element.
-func Image(x, y, w, h float64, src string, decimals int) Elem {
-	n := func(v float64) string { return Num(Round(v, decimals)) }
-	return Elem{Name: "image", Attrs: []Attr{
-		{"x", n(x)}, {"y", n(y)}, {"w", n(w)}, {"h", n(h)}, {"src", src},
-	}}
-}
-
-// Text returns a stencil <text> element.
-func Text(str string, x, y float64, align, valign string, decimals int) Elem {
-	n := func(v float64) string { return Num(Round(v, decimals)) }
-	return Elem{Name: "text", Attrs: []Attr{
-		{"str", str}, {"x", n(x)}, {"y", n(y)},
-		{"align", align}, {"valign", valign},
-	}}
-}
-
 // Set returns a single-attribute style element such as <strokecolor color=..>.
 func Set(name, attr, value string) Elem {
 	return Elem{Name: name, Attrs: []Attr{{attr, value}}}

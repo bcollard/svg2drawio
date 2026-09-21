@@ -57,22 +57,3 @@ func TestSampleFile(t *testing.T) {
 		t.Errorf("page name = %q", file.Models[0].Name)
 	}
 }
-
-func TestSampleAsStencilLibrary(t *testing.T) {
-	f, err := os.Open("../../testdata/sample.svg")
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer f.Close()
-
-	sh, err := StencilShape(f, "sample.svg", DefaultOptions())
-	if err != nil {
-		t.Fatal(err)
-	}
-	lib := &stencil.Library{Name: "samples", Shapes: []*stencil.Shape{sh}}
-	if err := xml.Unmarshal([]byte(lib.XML()), new(struct {
-		XMLName xml.Name `xml:"shapes"`
-	})); err != nil {
-		t.Fatalf("library is not well formed: %v", err)
-	}
-}

@@ -12,7 +12,6 @@ import (
 
 	"github.com/bcollard/svg2drawio/internal/convert"
 	"github.com/bcollard/svg2drawio/internal/mxgraph"
-	"github.com/bcollard/svg2drawio/internal/stencil"
 	"github.com/spf13/cobra"
 )
 
@@ -34,7 +33,7 @@ func (o *convertOptions) addFlags(cmd *cobra.Command) {
 	f.Float64Var(&o.scale, "scale", 1, "Scale all coordinates by this factor")
 	f.BoolVar(&o.noGroups, "no-groups", false, "Flatten SVG groups instead of keeping draw.io groups")
 	f.BoolVar(&o.noEdges, "no-edges", false, "Convert lines and polylines to shapes instead of edges")
-	f.StringVar(&o.name, "name", "", "Name of the diagram page or the stencil library")
+	f.StringVar(&o.name, "name", "", "Name of the diagram page")
 	f.BoolVarP(&o.quiet, "quiet", "q", false, "Do not print what was written")
 }
 
@@ -61,29 +60,6 @@ can be explicit.`,
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return opts.runDiagram(cmd, args)
-		},
-	}
-	opts.addFlags(cmd)
-	return cmd
-}
-
-func newStencilCmd() *cobra.Command {
-	opts := &convertOptions{}
-	cmd := &cobra.Command{
-		Use:     "stencil [flags] <input.svg|directory>...",
-		Aliases: []string{"library"},
-		Short:   "Convert SVGs to an mxGraph stencil library",
-		Long: `Convert SVG files into a single mxGraph stencil library (<shapes>), one
-shape per input file.
-
-Load the result in draw.io with Extras > Edit Shape Library, or host it and add
-it as a custom library. This is the output format of the original Java svg2xml.`,
-		Example: `  svg2drawio stencil -o icons.xml icons/
-  svg2drawio stencil --name mesh -o mesh.xml a.svg b.svg`,
-		Args:         cobra.MinimumNArgs(1),
-		SilenceUsage: true,
-		RunE: func(cmd *cobra.Command, args []string) error {
-			return opts.runStencil(cmd, args)
 		},
 	}
 	opts.addFlags(cmd)
@@ -140,43 +116,6 @@ func (o *convertOptions) diagramOf(path string, opt convert.Options) (*mxgraph.F
 	return file, nil
 }
 
-// runStencil writes every input as one shape of a single stencil library.
-func (o *convertOptions) runStencil(cmd *cobra.Command, args []string) error {
-	files, err := collectSVGs(args)
-	if err != nil {
-		return err
-	}
-	opt := o.convertOptions()
-
-	lib := &stencil.Library{Name: o.name}
-	if lib.Name == "" {
-		lib.Name = libraryName(files)
-	}
-
-	for _, f := range files {
-		r, err := os.Open(f)
-		if err != nil {
-			return err
-		}
-		opt.ShapeName = shapeName(lib.Name, f)
-		sh, err := convert.StencilShape(r, f, opt)
-		r.Close()
-		if err != nil {
-			return fmt.Errorf("%s: %w", f, err)
-		}
-		lib.Shapes = append(lib.Shapes, sh)
-	}
-
-	dest := o.out
-	if dest == "" {
-		dest = lib.Name + ".xml"
-	}
-	if looksLikeDir(dest) {
-		dest = filepath.Join(dest, lib.Name+".xml")
-	}
-	return o.write(cmd, dest, lib.XML(), strings.Join(files, ", "))
-}
-
 func (o *convertOptions) write(cmd *cobra.Command, dest, content, source string) error {
 	if dest == "-" || dest == "" {
 		_, err := io.WriteString(cmd.OutOrStdout(), content)
@@ -198,23 +137,6 @@ func (o *convertOptions) write(cmd *cobra.Command, dest, content, source string)
 		}
 	}
 	return nil
-}
-
-// shapeName builds the "library.shape" name draw.io shows in the shape picker.
-func shapeName(lib, path string) string {
-	base := strings.TrimSuffix(filepath.Base(path), filepath.Ext(path))
-	return strings.ToLower(lib) + "." + base
-}
-
-func libraryName(files []string) string {
-	if len(files) == 1 {
-		return strings.TrimSuffix(filepath.Base(files[0]), filepath.Ext(files[0]))
-	}
-	dir := filepath.Base(filepath.Dir(files[0]))
-	if dir == "" || dir == "." || dir == string(filepath.Separator) {
-		return "stencils"
-	}
-	return dir
 }
 
 // destFor resolves where a converted file is written. With several inputs the

@@ -1,5 +1,5 @@
-// Package convert turns an SVG document into draw.io XML: either a diagram of
-// native mxCells or a stencil shape library.
+// Package convert turns an SVG document into a draw.io diagram of native
+// mxCells.
 package convert
 
 import (
@@ -29,8 +29,6 @@ type Options struct {
 	Edges bool
 	// PageName is the name of the generated diagram page.
 	PageName string
-	// ShapeName is the base name used for stencils.
-	ShapeName string
 }
 
 // DefaultOptions returns the conversion defaults.
@@ -44,17 +42,6 @@ type converter struct {
 	opt  Options
 	grad *gradients
 	seq  int
-}
-
-// Result is the outcome of converting one SVG file.
-type Result struct {
-	// Width and Height are the output dimensions in draw.io units.
-	Width, Height float64
-	// Cells are the top level cells of the diagram.
-	Cells []*mxgraph.Cell
-	// Shape is the single stencil holding the whole drawing, used by the
-	// stencil library output.
-	Shape *stencil.Shape
 }
 
 // Diagram converts an SVG stream into a .drawio file.
@@ -79,24 +66,6 @@ func Diagram(r io.Reader, name string, opt Options) (*mxgraph.File, error) {
 			Cells:      cells,
 		}},
 	}, nil
-}
-
-// StencilShape converts an SVG stream into a single mxGraph stencil.
-func StencilShape(r io.Reader, name string, opt Options) (*stencil.Shape, error) {
-	c, root, err := newConverter(r, opt)
-	if err != nil {
-		return nil, err
-	}
-	w, h, m := c.viewport(root)
-
-	shapeName := opt.ShapeName
-	if shapeName == "" {
-		shapeName = displayName(name)
-	}
-
-	sh := &stencil.Shape{Name: shapeName, W: w, H: h}
-	sh.Foreground = c.stencilElems(root, m, c.rootStyle(root))
-	return sh, nil
 }
 
 func newConverter(r io.Reader, opt Options) (*converter, *svgdom.Node, error) {

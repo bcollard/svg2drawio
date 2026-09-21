@@ -160,9 +160,7 @@
 
 <span class="c"># Straight into draw.io's Extras → Edit Diagram box</span>
 <span class="p">svg2drawio</span> -o - diagram.svg | pbcopy
-
-<span class="c"># An mxGraph shape library instead of a diagram</span>
-<span class="p">svg2drawio</span> stencil --name mesh -o mesh.xml icons/</code></pre>
+</code></pre>
   </div>
 </section>
 
@@ -240,12 +238,12 @@
     <h2>Questions</h2>
 
     <details>
-      <summary>Is this the old jgraph/svg2xml?</summary>
+      <summary>How are curved shapes handled?</summary>
       <p>
-        No. That Java tool produced mxGraph <em>stencil libraries</em> — shape palettes, not
-        diagrams you open. svg2drawio is a Go rewrite whose default output is a real
-        <code>.drawio</code> diagram; the stencil-library output is still available under
-        <code>svg2drawio stencil</code>.
+        Anything draw.io has no native shape for — a curved or filled path, a polygon — is
+        written as an inline stencil, the same object draw.io produces for its own custom
+        shapes. It stays a real cell: selectable, resizable, and recolourable from the
+        format panel.
       </p>
     </details>
 

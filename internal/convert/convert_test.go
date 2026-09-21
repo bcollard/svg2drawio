@@ -407,27 +407,6 @@ func TestUseIsResolvedIntoRealCells(t *testing.T) {
 	}
 }
 
-func TestStencilModeProducesOneShape(t *testing.T) {
-	sh, err := StencilShape(strings.NewReader(svgWith(`
-		<rect x="10" y="10" width="20" height="20" fill="#ff0000"/>
-		<circle cx="50" cy="50" r="10" fill="none" stroke="#000"/>`)), "icon.svg", DefaultOptions())
-	if err != nil {
-		t.Fatal(err)
-	}
-	if sh.W != 200 || sh.H != 200 {
-		t.Errorf("stencil size = %vx%v, want the viewport", sh.W, sh.H)
-	}
-	xml := sh.XML(false)
-	for _, want := range []string{
-		`name="icon"`, `<fillcolor color="#ff0000"/>`, `<fill/>`,
-		`<strokecolor color="#000000"/>`, `<stroke/>`, `<save/>`, `<restore/>`,
-	} {
-		if !strings.Contains(xml, want) {
-			t.Errorf("stencil XML missing %q:\n%s", want, xml)
-		}
-	}
-}
-
 func TestDocumentOrderIsPreserved(t *testing.T) {
 	cells := cellsOf(t, svgWith(`
 		<rect id="a" x="0" y="0" width="5" height="5"/>
