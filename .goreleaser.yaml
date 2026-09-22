@@ -36,6 +36,11 @@ archives:
         dst: third_party_licenses
         strip_parent: true
 
+release:
+  # Let a re-run of a failed release job overwrite the assets it already
+  # uploaded; without this the second attempt dies on 422 already_exists.
+  replace_existing_artifacts: true
+
 checksum:
   name_template: checksums.txt
 
