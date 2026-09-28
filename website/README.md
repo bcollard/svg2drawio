@@ -5,7 +5,7 @@ HTML/CSS — no SSG, no framework, no JS dependencies. Served as static files fr
 a GCS bucket.
 
 Sibling sites using the same pattern: `../../claude-status-macos-menu-bar/website/`
-and `../../klimax-website/`.
+and `../../marina-website/`.
 
 ## Layout
 
